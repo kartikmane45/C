@@ -1,20 +1,22 @@
 #include<stdio.h>
 int main()
 {
-	int i,ele;
-	int a[]={1,2,3,4,5};
-
-	ele= sizeof(a)/sizeof(a[0]);
-
-	for(i=0;i<ele;i++)
+	int ele;
+//	int a[5];
+	int a[5]={10,20,30,40,50};
+	
+	ele = sizeof(a)/sizeof(a[0]);
+	
+	for(int i=0;i<ele;i++)
+//	for(int i=0;i<=ele-1;i++)
 	{
 		printf("%d ", a[i]);
 	}
 	printf("\n");
-	for(i=ele-1;i>=0;i--)
+	//for(int i=ele-1;i>=0;i--)
+	for(int i=ele-1;i>=0;i--)
 	{
 		printf("%d ", a[i]);
 	}
 	printf("\n");
-
 }
