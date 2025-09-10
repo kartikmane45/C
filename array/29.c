@@ -15,15 +15,22 @@ int main()
 
 	printf("\n");
 
-	for(i=0;i<ele;i++)
+	for(i=0,k=0;i<ele;i++,k++)
 	 {
-			if(i>=2)
-			a[i]=a[i+2];
-			
+
+		while(a[i] == a[k])
+		{
+			for(j=i;j<ele-1;j++)
+			{		
+			a[j]=a[j+1];
+			}
+		
+		ele--;
+		i--;
+		}
 	}
 
-printf("\n");
-for(i=0;i<ele-2;i++)
+for(i=0;i<ele;i++)
 	printf("%d ",a[i]);
 
 printf("\n");

@@ -21,11 +21,11 @@ int main()
 	for(i=0;i<ele;i++)
 	{
 		pd=1;
-		for(;a[i];a[i]=a[i]/10)
+		for(k=1;k<=a[i];k++)
 		{
-		r= a[i] % 10;
-		pd = pd *r;
+		pd = pd *k;
 		}
+
 		a[i]=pd;
 		
 	}

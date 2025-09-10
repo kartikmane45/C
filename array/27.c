@@ -17,13 +17,20 @@ int main()
 
 	for(i=0;i<ele;i++)
 	 {
-			if(i>=2)
-			a[i]=a[i+2];
-			
+//		 c++;
+		if(a[i] % 2 !=0)
+		{
+			for(j=i;j<ele-1;j++)
+			{		
+			a[j]=a[j+1];
+			}
+		
+		ele--;
+		i--;
+		}
 	}
 
-printf("\n");
-for(i=0;i<ele-2;i++)
+for(i=0;i<ele;i++)
 	printf("%d ",a[i]);
 
 printf("\n");

@@ -2,7 +2,7 @@
 int main()
 {
 
-	int i,ele,j,k,pd=1,r;
+	int i,ele,j,k,pd=1,r=0,sum=0,temp;
 	printf("enter ele:");
 	scanf("%d",&ele);
 
@@ -19,21 +19,32 @@ int main()
 
 
 	for(i=0;i<ele;i++)
-	{
-		pd=1;
-		for(;a[i];a[i]=a[i]/10)
+	{	
+		sum=0;
+		temp=a[i];
+		for(;temp;temp=temp/10)
 		{
-		r= a[i] % 10;
-		pd = pd *r;
+			r=temp % 10;
+			pd=1;
+			for(k=1;k<=r;k++)
+			{
+				pd = pd *k;
+			}
+			sum = sum + pd;
 		}
-		a[i]=pd;
+		if(sum == a[i])
+		{
+			c++;
+			printf("%d ", a[i]);
+		}
 		
 	}
 
 
-
+	printf("count= %d\n",c);
+/*
 	for(i=0;i<ele;i++)
 		printf("%d ",a[i]);
 	printf("\n");
-	
+*/	
 }
