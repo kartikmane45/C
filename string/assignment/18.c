@@ -4,23 +4,14 @@ int main()
 	char s[20];
 	printf("enter string: ");
 	scanf("%[^\n]",s);
-	
-	int i,j,len;
+
+	int i,j,len,dig,k,c=0;
 	for(len=0;s[len];len++);
-	
-	for(i=0;i<len-1;i++)
+
+	for(i=len;i>=2;i--)
 	{
-		
-		if(s[i]>=48 && s[i]<=58)
-		{
-		for(j=i;j<len-1;j++)
-		{
-			s[j]=s[j+1];
-		i--;
-		
-		}
-		s[j]='\0';
-		}
+		s[i+1]=s[i];
 	}
+	s[2]='9';
 	printf("string: %s\n",s);
 }
