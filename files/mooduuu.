@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct student
+{
+    int roll_no;
+    char *name;
+    float marks;
+};
+
+int perfect(struct student *p);   // ONE ARG
+void reverse(struct student *p);  // ONE ARG
+
+void main(int argc, char **argv)
+{
+    FILE *fp = fopen(argv[1], "r");
+
+    int n = 5;
+    struct student *p[n];
+    int i, count = 0;
+
+    // READ DATA
+    for(i = 0; i < n; i++)
+    {
+        p[i] = malloc(sizeof(struct student));
+        p[i]->name = malloc(50);
+
+        fscanf(fp, "%d %s %f",
+               &p[i]->roll_no,
+               p[i]->name,
+               &p[i]->marks);
+    }
+
+    // PROCESS
+    for(i = 0; i < n; i++)
+    {
+        // TASK 1: perfect roll number
+        if(perfect(p[i]))
+            count++;
+
+        // TASK 2: reverse name if starts with vowel
+        char ch = p[i]->name[0];
+        if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'||
+           ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U')
+        {
+            reverse(p[i]);   // ONE ARGUMENT
+        }
+    }
+
+    printf("Perfect roll count = %d\n\n", count);
+
+    // PRINT RESULT
+    for(i = 0; i < n; i++)
+        printf("%d %s %.2f\n", p[i]->roll_no, p[i]->name, p[i]->marks);
+}
+
+
+/* ---------------------------------------------------------
+   PERFECT NUMBER CHECK (only 1 argument)
+   --------------------------------------------------------- */
+int perfect(struct student *p)
+{
+    static int i = 1, sum = 0;
+    int n = p->roll_no;
+
+    if(i < n)
+    {
+        if(n % i == 0)
+            sum += i;
+
+        i++;
+
+        return perfect(p);
+    }
+    else
+    {
+        int result = (sum == n);
+
+        // Reset static variables
+        i = 1;
+        sum = 0;
+
+        return result;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   REVERSE NAME USING ONLY ONE ARGUMENT (struct student *)
+   --------------------------------------------------------- */
+void reverse(struct student *p)
+{
+    static int start = 0;
+    static int end = -1;
+
+    char *s = p->name;   // extract string
+
+    if(end == -1)             // initialize end only once
+        end = strlen(s) - 1;
+
+    if(start >= end)          // stop condition
+    {
+        start = 0;
+        end = -1;             // reset for next call
+        return;
+    }
+
+    char temp = s[start];
+    s[start] = s[end];
+    s[end] = temp;
+
+    start++;
+    end--;
+
+    reverse(p);               // recursive call
+}
+
